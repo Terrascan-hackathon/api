@@ -1,61 +1,44 @@
-import { IData, IBlock } from "./interfaces";
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class Blockchain {
-    blockchain: unknown[];
-    transaction: unknown[];
-    transactionPool: unknown[];
-    genesisBlockData: unknown[]
-    lastBlock: {
-        hash: IData,
-    };
-    smartContract: {
-        forest: string[],
-        sea: string[]
-    }
     constructor() {
         this.transaction = [];
-        this.blockchain = [];
         this.transactionPool = [];
         this.smartContract = {
             forest: [],
             sea: []
-        }
+        };
     }
-
-    sha256(data: IData) {
-        let sha256Data = data[(Math.random() * 10)] + data[(Math.random() * 10)];
-        return sha256Data;
+    sha256(data) {
+        data = data[(Math.random() * 10)] + data[(Math.random() * 10)];
+        return data;
     }
-
     // to create a new block in the blockchain
-    createNewBlock(previousBlockHash: string, index: number, data: IData) {
-        const newBlock: IBlock = {
+    createNewBlock(previousBlockHash, data) {
+        const newBlock = {
             data: data,
-            index: index,
             timestamp: Date.now(),
             previousBlockHash: previousBlockHash,
             hash: this.calculateBlockHash(data)
         };
         return newBlock;
     }
-
     // to calculate the hash of a block
-    calculateBlockHash(blockData: IData) {
+    calculateBlockHash(blockData) {
         // Use a cryptographic hash like SHA-256 to generate the hash
         return this.sha256(blockData);
     }
-
     // to add a new transaction to the blockchain
     addNewTransaction(transactionData) {
         // Verify the transaction data meets the requirements of the smart contract
         if (this.validateTransaction(transactionData)) {
             // Add the transaction to the transaction pool for processing
             this.transactionPool.push(transactionData);
-        } else {
+        }
+        else {
             throw new Error("Invalid transaction data.");
         }
     }
-
     // to validate a transaction against the smart contract rules
     validateTransaction(transactionData) {
         // Perform checks to ensure the transaction data meets the requirements of the smart contract
@@ -65,7 +48,6 @@ class Blockchain {
             return true;
         return false;
     }
-
     // to process transactions in the transaction pool and add them to a block
     processTransactionsIntoBlock(transactions) {
         const blockData = {
@@ -73,22 +55,19 @@ class Blockchain {
             nonce: this.generateNonce(),
             difficulty: this.calculateDifficulty()
         };
-        return this.createNewBlock(this.getLastBlock().hash, this.blockData);
+        return this.createNewBlock(this.lastBlock.hash, this.blockData);
     }
-
     // to generate a nonce for use in proof-of-work calculations
     generateNonce() {
         // Use a random number generator to generate a nonce value
         return Math.floor(Math.random() * 1000000);
     }
-
     // to calculate the current difficulty of the proof-of-work algorithm
     calculateDifficulty() {
         // Use a formula to adjust the difficulty based on the time it took to mine the previous block
         // For example, if the previous block took longer than 10 minutes to mine, increase the difficulty
         // If it took less than 10 minutes, decrease the difficulty
     }
-
     // to update the blockchain with a newly mined block
     addMinedBlockToBlockchain(block) {
         // Verify that the block is valid and has the correct proof-of-work
@@ -97,11 +76,11 @@ class Blockchain {
             this.blockchain.push(block);
             // Remove the processed transactions from the transaction pool
             this.removeTransactionsFromPool(block.transactions);
-        } else {
+        }
+        else {
             throw new Error("Invalid block data.");
         }
     }
-
     // to validate a block against the previous block in the blockchain
     validateBlock(block) {
         // Verify that the previous block hash in the new block matches the hash of the last block in the chain
@@ -118,14 +97,12 @@ class Blockchain {
         }
         return true;
     }
-
     // to validate the proof-of-work algorithm for a block
     validateProofOfWork(block) {
         // Perform proof-of-work calculations to verify that the block was correctly mined
         // For example, check that the hash of the block data and nonce meets a certain difficulty requirement
         return true;
     }
-
     // to validate transactions in a block against the smart contract rules
     validateTransactions(transactions) {
         // Iterate over all transactions in the block and validate each one
@@ -136,7 +113,6 @@ class Blockchain {
         }
         return true;
     }
-
     // to remove processed transactions from the transaction pool
     removeTransactionsFromPool(transactions) {
         // Iterate over all transactions in the block and remove them from the transaction pool
@@ -147,12 +123,10 @@ class Blockchain {
             }
         }
     }
-
     // to get the last block in the blockchain
     getLastBlock() {
         return this.blockchain[this.blockchain.length - 1];
     }
-
     // to initialize the blockchain with a genesis block
     initializeBlockchain() {
         const genesisBlockData = {
@@ -163,7 +137,6 @@ class Blockchain {
         const genesisBlock = this.createNewBlock("0", this.genesisBlockData);
         this.blockchain.push(genesisBlock);
     }
-
     // to interact with the smart contract and execute a contract public
     executeSmartContract(dataExists, requirements) {
         // Verify that the name is a valid in the smart contract
@@ -177,7 +150,6 @@ class Blockchain {
         // Execute the in the smart contract and return the result
         return this.smartContract[dataExists](...requirements);
     }
-
     // to validate a name against the smart contract
     validateSmartContract(dataExists) {
         // Perform checks to ensure the name is a valid in the smart contract
@@ -186,7 +158,6 @@ class Blockchain {
             return true;
         return false;
     }
-
     // to validate arguments against the smart contract requirements
     validateSmartContractReq(dataExists, requirements) {
         // Perform checks to ensure the arguments meet the requirements of the smart contract public

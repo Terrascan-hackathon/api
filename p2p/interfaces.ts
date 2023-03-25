@@ -1,3 +1,11 @@
 export interface IData {
-    data: unknown[]
+    data: string[] | string
 }
+export interface IBlock {
+    data: IData
+    index: number;
+    hash: string[];
+    previousBlockHash: string;
+    timestamp: number;
+}
+
