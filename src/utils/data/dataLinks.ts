@@ -1,0 +1,9 @@
+const dataLinks = [
+    // 'https://mundiwebservices.com/dp/s2-l2a-2023/35/T/QH/2023/03/20/S2A_MSIL2A_20230320T084651_N0509_R107_T35TQH_20230320T131854/GRANULE/L2A_T35TQH_A040430_20230320T085613/QI_DATA/MSK_CLASSI_B00.jp2'
+    // 'https://mundiwebservices.com/dp/s1-l1-grd-2022/2022/12/26/IW/DV/S1A_IW_GRDH_1SDV_20221226T062839_20221226T062904_046499_05923F_CF81/support/s1-product-preview.xsd'
+    'https://mundiwebservices.com/dp/s1-l1-grd-2022/2022/12/27/IW/DV/S1A_IW_GRDH_1SDV_20221227T150240_20221227T150305_046519_0592F9_9459/annotation/calibration/calibration-s1a-iw-grd-vh-20221227t150240-20221227t150305-046519-0592f9-002.xml',
+    // 'https://mundiwebservices.com/dp/s1-l1-grd-2022/2022/12/27/IW/DV/S1A_IW_GRDH_1SDV_20221227T150240_20221227T150305_046519_0592F9_9459/annotation/calibration/calibration-s1a-iw-grd-vv-20221227t150240-20221227t150305-046519-0592f9-001.xml',
+    // 'https://mundiwebservices.com/dp/s1-l1-grd-2022/2022/12/27/IW/DV/S1A_IW_GRDH_1SDV_20221227T150215_20221227T150240_046519_0592F9_2A17/annotation/s1a-iw-grd-vv-20221227t150215-20221227t150240-046519-0592f9-001.xml'
+];
+
+export default dataLinks;
