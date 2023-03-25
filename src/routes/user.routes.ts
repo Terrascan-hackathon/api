@@ -6,6 +6,8 @@ const userRoutes = express.Router();
 
 userRoutes.post('/signup', utils.validateBody(utils.payloads.user.signup), userController.register);
 userRoutes.post('/login', utils.validateBody(utils.payloads.user.login), userController.login);
+userRoutes.post('/logout', utils.validateAccessToken, userController.logout);
+
 userRoutes.get('/hello', utils.validateAccessToken, (req: Request, res: Response) => {
     const plain = 'Hello world!';
 

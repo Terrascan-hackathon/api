@@ -1,9 +1,11 @@
 import register from "./register";
 import login from './login';
+import logout from './logout';
 
 const userController = {
     register,
-    login
+    login,
+    logout
 };
 
 export default userController;
