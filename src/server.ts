@@ -2,6 +2,7 @@ import express from 'express';
 import connectDB from './utils/database/connectDB';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import mainRoutes from './routes/main.routes';
 
 const PORT = 5050;
 
@@ -25,6 +26,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
+
+app.use('/terrascan/api', mainRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
