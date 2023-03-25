@@ -7,6 +7,8 @@ import userCreateToken from './token/signJWT';
 import getUser from './token/getUser';
 import refreshToken from './token/refreshToken';
 import validateAccessToken from './token/validateAccessToken';
+import dataLinks from './data/dataLinks';
+import decodeAccessToken from './token/decodeAccessToken';
 
 const utils = {
     connectDB,
@@ -18,7 +20,9 @@ const utils = {
     userCreateToken,
     getUser,
     refreshToken,
-    validateAccessToken
+    validateAccessToken,
+    dataLinks,
+    decodeAccessToken
 };
 
 export default utils;

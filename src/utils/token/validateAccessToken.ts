@@ -8,7 +8,7 @@ const validateAccessToken = async (req: Request, res: Response, next: NextFuncti
     try {
         const route = req.originalUrl;
         const cookieAccessTokenAge = config.server.development ? `Max-Age=${60 * 60 * 24}` : `Max-Age=${60 * 60 * 24}`;
-        const cookieOptions = config.server.development ? `` : ``;
+        const cookieOptions = config.server.development ? `` : `SameSite=None; Secure=True`;
         const redirectUrl = 'http://localhost:5173' + route;
         
         if (!req.headers.cookie) {
