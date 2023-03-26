@@ -21,7 +21,7 @@ export const params = {
         getData: Joi.object({
             date: Joi.string().pattern(new RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/)).required(),
             location: Joi.string().trim().required(),
-            type: Joi.string().valid('temperature').trim().required()
+            type: Joi.string().trim().required()
         })
     }
 }

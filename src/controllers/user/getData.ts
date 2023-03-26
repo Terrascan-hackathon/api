@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import utils from "../../utils/utils";
+import { exec } from 'child_process';
 
 const getData = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -23,6 +24,18 @@ const getData = async (req: Request, res: Response, next: NextFunction) => {
         const month = dateBuffer.getMonth();
         const day = dateBuffer.getDate();
 
+        // const data = req.body.data;
+        exec('python3 hello.py', (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+            }
+            else if (stderr) {
+              console.log(`stderr: ${stderr}`);
+            }
+            else {
+              console.log(stdout);
+            }
+          })
         return res.status(200).json({
             ok: 'ok'
         })
