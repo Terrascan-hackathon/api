@@ -23,7 +23,7 @@ min_temp = temperature.min()
 
 # Detect possible fire
 diff_temp = temperature.diff(dim='time') # Compute the difference between adjacent time steps
-fire_idx = np.where(diff_temp > 5) # Find indices where the temperature difference is greater than 10 degrees
+fire_idx = np.where(diff_temp > 20) # Find indices where the temperature difference is greater than 15 degrees
 
 if fire_idx[0].size > 0:
     print("Possible fire detected!")
@@ -34,6 +34,9 @@ if fire_idx[0].size > 0:
 
     # Create a color-coded image of the temperature data
     plt.imshow(temperature_single, cmap='hot', aspect='auto')
+    plt.ylabel('Temperature')
+    plt.xlabel('Indices where the temperature difference is greater than 20 degrees')
+    plt.savefig('../../../temperature.png', dpi=300)
 
     # Show the plot
     plt.show()
