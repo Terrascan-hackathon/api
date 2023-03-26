@@ -11,6 +11,10 @@ const userRoutes = express.Router();
 userRoutes.post('/signup', utils.validateBody(utils.payloads.user.signup), userController.register);
 userRoutes.post('/login', utils.validateBody(utils.payloads.user.login), userController.login);
 userRoutes.post('/logout', utils.validateAccessToken, userController.logout);
+userRoutes.post('/posts', utils.validateAccessToken, utils.validateBody(utils.payloads.user.post), userController.post);
+
+userRoutes.get('/reporters', utils.validateAccessToken, userController.getReporters);
+userRoutes.get('/data/:date/:location/:type', utils.validateAccessToken, utils.validateParams(utils.params.user.getData), userController.getData);
 
 userRoutes.get('/hello', utils.validateAccessToken, async (req: Request, res: Response) => {
     try {

@@ -9,6 +9,8 @@ import refreshToken from './token/refreshToken';
 import validateAccessToken from './token/validateAccessToken';
 import dataLinks from './data/dataLinks';
 import decodeAccessToken from './token/decodeAccessToken';
+import validateDate from './validators/validateDate';
+import { validateParams, params } from './validators/validateParams';
 
 const utils = {
     connectDB,
@@ -22,7 +24,10 @@ const utils = {
     refreshToken,
     validateAccessToken,
     dataLinks,
-    decodeAccessToken
+    decodeAccessToken,
+    validateDate,
+    validateParams,
+    params
 };
 
 export default utils;
