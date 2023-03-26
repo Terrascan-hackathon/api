@@ -41,6 +41,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+python/ml/lib/build
+python/ml/temperature/*.nc
+
 # TypeScript v1 declaration files
 typings/
 
