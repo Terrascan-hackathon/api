@@ -42,7 +42,7 @@ node_modules/
 jspm_packages/
 
 python/ml/lib/build
-python/ml/temperature/*.nc
+python/ml/temperature/nc/*.nc
 
 # TypeScript v1 declaration files
 typings/
