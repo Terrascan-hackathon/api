@@ -25,17 +25,18 @@ const getData = async (req: Request, res: Response, next: NextFunction) => {
         const day = dateBuffer.getDate();
 
         // const data = req.body.data;
-        exec('python3 hello.py', (error, stdout, stderr) => {
+        // spawn('python', ['hello.py', "Ro"]);
+        exec(`python3 python/ml/country_box.py ${location}`, (error, stdout, stderr) => {
             if (error) {
-              console.log(`error: ${error.message}`);
+                console.log(`error: ${error.message}`);
             }
             else if (stderr) {
-              console.log(`stderr: ${stderr}`);
+                console.log(`stderr: ${stderr}`);
             }
             else {
-              console.log(stdout);
+                console.log(stdout);
             }
-          })
+        })
         return res.status(200).json({
             ok: 'ok'
         })
