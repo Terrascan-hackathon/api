@@ -99,7 +99,7 @@ def display_country_on_world_map(country_name, fig_size=18, color='red'):
 
     plt.ylabel('Latitude')
     plt.xlabel('Longitude')
-    plt.savefig('foo.png')
+    plt.savefig('country.png')
 
     plt.show()
 
