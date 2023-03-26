@@ -35,12 +35,13 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         }
 
         userProfile.password = '';
+        userProfile.loggedIn = true;
 
         const { accessToken, refreshToken }: interfaces.IAuth = utils.userCreateToken(userProfile);
 
         return res
-            .setHeader("Access-Control-Allow-Credentials", 'true')
-            .setHeader("Access-Control-Allow-Origin", domain)
+            // .setHeader("Access-Control-Allow-Credentials", 'true')
+            // .setHeader("Access-Control-Allow-Origin", domain)
             .setHeader(
                 'Set-Cookie', [
                     `accessToken=${accessToken}; ${cookieAccessTokenAge}; ${cookieOptions}`,

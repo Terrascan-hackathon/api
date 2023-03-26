@@ -25,8 +25,8 @@ const logout = async (req: Request, res: Response, next: NextFunction) => {
             })
             .then(() => {
                 return res
-                .setHeader("Access-Control-Allow-Credentials", 'true')
-                .setHeader("Access-Control-Allow-Origin", domain)
+                // .setHeader("Access-Control-Allow-Credentials", 'true')
+                // .setHeader("Access-Control-Allow-Origin", domain)
                 .setHeader(
                     'Set-Cookie', [
                         `accessToken=; Max-Age=0`,
