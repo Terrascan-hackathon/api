@@ -12,7 +12,7 @@ const app = express();
 // Connect to MongoDB
 utils.connectDB();
 
-const corsOrigin = config.server.development ? true : 'http://localhost:5137';
+const corsOrigin = config.server.development ? true : 'http://localhost:5173';
 
 app.use(cors({
     origin: corsOrigin,
