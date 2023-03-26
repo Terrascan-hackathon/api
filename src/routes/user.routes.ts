@@ -14,7 +14,7 @@ userRoutes.post('/logout', utils.validateAccessToken, userController.logout);
 userRoutes.post('/posts', utils.validateAccessToken, utils.validateBody(utils.payloads.user.post), userController.post);
 
 userRoutes.get('/reporters', utils.validateAccessToken, userController.getReporters);
-userRoutes.get('/data/:date/:location/:type', utils.validateAccessToken, utils.validateParams(utils.params.user.getData), userController.getData);
+userRoutes.get('/data/:location', utils.validateAccessToken, utils.validateParams(utils.params.user.getData), userController.getData);
 
 userRoutes.get('/hello', utils.validateAccessToken, async (req: Request, res: Response) => {
     try {

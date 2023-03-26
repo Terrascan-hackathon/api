@@ -1,8 +1,9 @@
 import { IData } from "./interfaces";
 
-class Blockchain {
+export class Blockchain {
     transaction: unknown[];
     transactionPool: unknown[];
+    blockchain: unknown[];
     smartContract: {
         forest: string[],
         sea: string[]
@@ -66,7 +67,8 @@ class Blockchain {
             nonce: this.generateNonce(),
             difficulty: this.calculateDifficulty()
         };
-        return this.createNewBlock(this.lastBlock.hash, this.blockData);
+        const lastBlock: unknown = this.getLastBlock();
+        return this.createNewBlock(lastBlock?.hash, blockData);
     }
 
     // to generate a nonce for use in proof-of-work calculations

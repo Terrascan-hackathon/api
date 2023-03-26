@@ -1,31 +1,67 @@
 import { Request, Response, NextFunction } from "express";
 import utils from "../../utils/utils";
+import { exec } from 'child_process';
+import * as fs from 'fs';
+
+const countryPath = 'country.png';
+const temperaturePath = 'temperature.png';
+
+const convertBase64 = (path: string) => {
+    const bitmap = fs.readFileSync(path);
+    const base64 = bitmap.toString('base64');
+    return base64;
+}
+
+const pythonCommand = async (location: string) => {
+    exec(`python3 python/ml/country_box.py ${location}`, (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+        }
+        else if (stderr) {
+            console.log(`stderr: ${stderr}`);
+        }
+        else {
+            console.log(stdout);
+        }
+    })
+};
+
+const pythonCommand2 = async () => {
+    exec(`python3 python/ml/country_box.py`, (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+        }
+        else if (stderr) {
+            console.log(`stderr: ${stderr}`);
+        }
+        else {
+            console.log(stdout);
+        }
+    })
+}
 
 const getData = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const {
-            date,
-            location,
-            type
+            location
         } = req.params;
 
-        const validDate = utils.validateDate(date);
+        await pythonCommand(location)
+            .then(async () => {
+                const country = convertBase64(countryPath);
+                const temperature = convertBase64(temperaturePath);
 
-        if (!validDate) {
-            return res.status(400).json({
-                error: 'Invalid date.'
+                return res.status(200).json({
+                    country,
+                    temperature
+                })
             })
-        }
+            .catch(() => {
+                return res.status(500).json({
+                    error: 'Something went wrong.'
+                })
+            })
 
-        const dateBuffer = new Date(date);
-
-        const year = dateBuffer.getFullYear();
-        const month = dateBuffer.getMonth();
-        const day = dateBuffer.getDate();
-
-        return res.status(200).json({
-            ok: 'ok'
-        })
     } catch (error) {
         return res.status(500).json({
             error

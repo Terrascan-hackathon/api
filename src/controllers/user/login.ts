@@ -12,8 +12,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
             password
         } = req.body;
 
-        const domain = config.server.development ? "http://127.0.0.1:5050" : "http://localhost:5137";
-        const cookieOptions = config.server.development ? `` : `SameSite=None; Secure=True`;
+        // const domain = config.server.development ? "http://127.0.0.1:5050" : "http://localhost:5137";
+        const cookieOptions = config.server.development ? `` : ``;
         const cookieAccessTokenAge = config.server.development ? `Max-Age=${60 * 60 * 24}` : `Max-Age=${60 * 60 * 24}`;
 
         const trimmedLowewercaseEmail = email.toLowerCase().trim();

@@ -6,7 +6,7 @@ import models from "../../models/models";
 
 const logout = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const domain = config.server.development ? "http://127.0.0.1:5050" : "http://localhost:5137";
+        // const domain = config.server.development ? "http://127.0.0.1:5050" : "http://localhost:5137";
         const { id } = decodeAccessToken(req, res) as interfaces.IPayload;
 
         const userProfile = await models.User.findById(id);
