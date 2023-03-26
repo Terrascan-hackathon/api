@@ -99,9 +99,11 @@ def display_country_on_world_map(country_name, fig_size=18, color='red'):
 
     plt.ylabel('Latitude')
     plt.xlabel('Longitude')
-    plt.savefig('country.png')
+    fig = plt.gcf()
+    fig.set_size_inches(6, 4)
 
-    plt.show()
+    # Save the figure with the reduced size
+    plt.savefig('country.png', dpi=300)
 
 
 def city_polygon_bbox(city_name):
