@@ -2,12 +2,15 @@ import { Request, Response, NextFunction } from "express";
 import utils from "../../utils/utils";
 import { exec } from 'child_process';
 import * as fs from 'fs';
+const resizebase64 = require('resize-base64');
 
 const filePath = 'country.png';
 
 const convertBase64 = (path: string) => {
     const bitmap = fs.readFileSync(path);
-    return bitmap.toString('base64');
+    const base64 = bitmap.toString('base64');
+    const resized = resizebase64(base64, 800, 600);
+    return resized;
 }
 
 const pythonCommand = async (location: string) => {
@@ -47,21 +50,19 @@ const getData = async (req: Request, res: Response, next: NextFunction) => {
         //     }
         // })
 
-        const executed = await pythonCommand(location);
+        await pythonCommand(location)
+            .then(() => {
+                const pythonResponse = convertBase64(filePath);
 
-        if (executed) {
-            const pythonResponse = convertBase64(filePath);
-
-            return res.status(200).json({
-                pythonResponse
+                return res.status(200).json({
+                    pythonResponse
+                })
             })
-        } else {
-            return res.status(500).json({
-                error: 'Something went wrong.'
+            .catch(() => {
+                return res.status(500).json({
+                    error: 'Something went wrong.'
+                })
             })
-        }
-
-  
     } catch (error) {
         return res.status(500).json({
             error
