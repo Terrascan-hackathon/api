@@ -3,9 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-import os
-import xarray as xr
-
 folder = "/home/adrian/Desktop/SBD/SBD-projects/hackathon/terrascan/api/python/ml/temperature"
 filenames = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith('.nc')]
 
@@ -23,7 +20,7 @@ min_temp = temperature.min()
 
 # Detect possible fire
 diff_temp = temperature.diff(dim='time') # Compute the difference between adjacent time steps
-fire_idx = np.where(diff_temp > 20) # Find indices where the temperature difference is greater than 15 degrees
+fire_idx = np.where(diff_temp > 20) # Find indices where the temperature difference is greater than 20 degrees
 
 if fire_idx[0].size > 0:
     print("Possible fire detected!")
