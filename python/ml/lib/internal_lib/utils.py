@@ -100,10 +100,12 @@ def display_country_on_world_map(country_name, fig_size=18, color='red'):
     plt.ylabel('Latitude')
     plt.xlabel('Longitude')
     fig = plt.gcf()
-    fig.set_size_inches(6, 4)
+    fig.set_size_inches(5, 4)
 
     # Save the figure with the reduced size
-    plt.savefig('country.png', dpi=300)
+    plt.savefig('country.png', dpi=200)
+
+    # plt.show()
 
 
 def city_polygon_bbox(city_name):

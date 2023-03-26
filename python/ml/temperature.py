@@ -1,5 +1,8 @@
 import os
 import cdsapi
+import sys
+from lib.internal_lib.utils import country_polygon_bbox
+import subprocess
 
 folder = "/home/adrian/Desktop/SBD/SBD-projects/hackathon/terrascan/api/python/ml/temperature"
 
@@ -9,7 +12,14 @@ os.environ['CDSAPI_KEY'] = '186915:0cbd2793-51c7-4540-8c0f-5b223d8c0bf2'
 if not os.path.exists(folder):
     os.makedirs(folder)
 
-for i in range(1, 30):
+if len(sys.argv) > 1:
+    country_name = sys.argv[1]
+else:
+    country_name = "Romania"
+
+polygon, bbox = country_polygon_bbox(country_name)
+
+for i in range(21, 23):
     file = f'/temperature{i}.nc'
     day = 1+i
     filename = folder + os.sep + file
@@ -21,14 +31,17 @@ for i in range(1, 30):
             "variable": "temperature",
             "pressure_level": "1000",
             "product_type": "reanalysis",
-            "year": ['2016','2017', '2018', '2019','2020','2021', '2022'],
-            "month": ["05","06", "07", "08", "09", "10"],
+            "year": "2022",
+            "month": "07",
             "day": day,
-            "time": ["12:00", "13:00", "14:00", "15:00", "16:00"],
-            "area": [20, 43, 30, 49],
+            "time": "12:00",
+            "area": bbox,
             "format": "netcdf"
         },
         filename)
+    
+# Run the script
+subprocess.run(['python3', '/home/adrian/Desktop/SBD/SBD-projects/hackathon/terrascan/api/python/ml/temperature/analyze_temp.py'])
 
 # Save the retrieved data to a netCDF file
 # data.to_netcdf('temperature.nc')

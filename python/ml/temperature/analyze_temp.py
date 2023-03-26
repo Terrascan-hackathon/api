@@ -33,10 +33,10 @@ if fire_idx[0].size > 0:
     plt.imshow(temperature_single, cmap='hot', aspect='auto')
     plt.ylabel('Temperature')
     plt.xlabel('Indices where the temperature difference is greater than 20 degrees')
-    plt.savefig('../../../temperature.png', dpi=300)
+    plt.savefig('/home/adrian/Desktop/SBD/SBD-projects/hackathon/terrascan/api/temperature.png', dpi=200)
 
     # Show the plot
-    plt.show()
+    # plt.show()
 
 else:
     print("No fire detected.")

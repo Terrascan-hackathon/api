@@ -12,7 +12,7 @@ const convertBase64 = (path: string) => {
     return base64;
 }
 
-const pythonCommand = async (location: string) => {
+const pythonCommandCountry = async (location: string) => {
     exec(`python3 python/ml/country_box.py ${location}`, (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
@@ -26,8 +26,8 @@ const pythonCommand = async (location: string) => {
     })
 };
 
-const pythonCommand2 = async () => {
-    exec(`python3 python/ml/country_box.py`, (error, stdout, stderr) => {
+const pythonCommandAnalyze = async (location: string) => {
+    exec(`python3 python/ml/temperature.py ${location}`, (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
         }
@@ -46,14 +46,18 @@ const getData = async (req: Request, res: Response, next: NextFunction) => {
             location
         } = req.params;
 
-        await pythonCommand(location)
+        await pythonCommandCountry(location)
             .then(async () => {
-                const country = convertBase64(countryPath);
-                const temperature = convertBase64(temperaturePath);
+                await pythonCommandAnalyze(location).then(() => {
+                    setTimeout(() => {
+                        const country = convertBase64(countryPath);
+                        const temperature = convertBase64(temperaturePath);
 
-                return res.status(200).json({
-                    country,
-                    temperature
+                        return res.status(200).json({
+                            country,
+                            temperature
+                        })
+                    }, 3000)
                 })
             })
             .catch(() => {
