@@ -1,7 +1,9 @@
-import User from '../models/user.model';
+import User from './user.model';
+import Post from './post.model';
 
 const models = {
-    User
+    User,
+    Post
 };
 
 export default models;

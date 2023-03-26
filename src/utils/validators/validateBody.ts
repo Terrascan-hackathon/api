@@ -26,6 +26,12 @@ export const payloads = {
         login: Joi.object<interfaces.IUser>({
             email: Joi.string().trim().pattern(new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/)).required(),
             password: Joi.string().pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,32})/)).required()
+        }),
+        post: Joi.object<interfaces.IPost>({
+            title: Joi.string().required(),
+            severity: Joi.number().valid(0, 1,2).required(),
+            description: Joi.string().required(),
+            image: Joi.string()
         })
     }
 };
