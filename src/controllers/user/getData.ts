@@ -45,25 +45,16 @@ const getData = async (req: Request, res: Response, next: NextFunction) => {
         const {
             location
         } = req.params;
-        
+
         await pythonCommand(location)
             .then(async () => {
                 const country = convertBase64(countryPath);
+                const temperature = convertBase64(temperaturePath);
 
-                await pythonCommand2()
-                    .then(() => {
-                        const temperature = convertBase64(temperaturePath);
-
-                        return res.status(200).json({
-                            country,
-                            temperature
-                        })
-                    })
-                    .catch(() => {
-                        return res.status(500).json({
-                            error: 'Something went wrong.'
-                        })
-                    })
+                return res.status(200).json({
+                    country,
+                    temperature
+                })
             })
             .catch(() => {
                 return res.status(500).json({
